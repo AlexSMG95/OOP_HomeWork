@@ -84,40 +84,6 @@ class Reviewer(Mentor):
         else:
             return 'Ошибка'
 
-
-# Создание экземпляров классов
-student1 = Student("Иван", "Иванов", "Мужской")
-student2 = Student("Анна", "Петрова", "Женский")
-
-lecturer1 = Lecturer("Сергей", "Сергеев")
-lecturer2 = Lecturer("Ольга", "Васильева")
-
-reviewer1 = Reviewer("Михаил", "Кузнецов")
-
-# Назначаем курсы студентам
-student1.courses_in_progress.extend(["Python", "Java"])
-student1.finished_courses.append("C++")
-
-student2.courses_in_progress.extend(["Python", "Kotlin"])
-student2.finished_courses.append("HTML/CSS")
-
-# Преподаватели прикрепляются к своим курсам
-lecturer1.courses_attached.extend(["Python", "Java"])
-lecturer2.courses_attached.extend(["Python", "Kotlin"])
-
-# Ревьюер проверяет два курса
-reviewer1.courses_attached.extend(["Python", "Java"])
-
-# Оценивание студентов и лекторов
-student1.rate_lecture(lecturer1, "Python", 9)
-student2.rate_lecture(lecturer1, "Python", 8)
-
-student2.rate_lecture(lecturer2, "Kotlin", 7)
-
-reviewer1.rate_hw(student1, "Python", 10)
-reviewer1.rate_hw(student2, "Python", 9)
-
-
 # Функция подсчёта среднего балла студентов за определённый курс
 def average_student_grades(students, course_name):
     total_sum = 0
@@ -143,6 +109,45 @@ def average_lecturers_grades(lecturers, course_name):
 
     return round(total_sum / count, 1) if count != 0 else None
 
+# Создаем экземпляры студентов
+student1 = Student("Иван", "Иванов", "Мужской")
+student2 = Student("Анна", "Петрова", "Женский")
+
+# Создаем экземпляры лекторов
+lecturer1 = Lecturer("Сергей", "Сергеев")
+lecturer2 = Lecturer("Ольга", "Васильева")
+
+# Создаем экземпляры рецензентов
+reviewer1 = Reviewer("Михаил", "Кузнецов")
+reviewer2 = Reviewer("Елена", "Смирнова")
+
+# Настройка курсов для студентов
+student1.courses_in_progress.extend(["Python", "Java"])
+student1.finished_courses.append("C++")
+
+student2.courses_in_progress.extend(["Python", "Kotlin"])
+student2.finished_courses.append("HTML/CSS")
+
+# Настройка курсов для лекторов
+lecturer1.courses_attached.extend(["Python", "Java"])
+lecturer2.courses_attached.extend(["Python", "Kotlin"])
+
+# Проставление курсов для рецензентов
+reviewer1.courses_attached.extend(["Python", "Java"])
+reviewer2.courses_attached.extend(["Python"])
+
+# ОЦЕНКИ СТУДЕНТОВ ЛЕКТОРАМ
+student1.rate_lecture(lecturer1, "Python", 9)
+student2.rate_lecture(lecturer1, "Python", 8)
+
+student2.rate_lecture(lecturer2, "Kotlin", 7)
+
+# РЕВЬЮЕРЫ ПРОВЕРЯЮТ РАБОТУ СТУДЕНТОВ
+reviewer1.rate_hw(student1, "Python", 10)
+reviewer1.rate_hw(student2, "Python", 9)
+
+reviewer2.rate_hw(student1, "Python", 9)  # проверка вторым рецензентом
+
 
 # Тестируем все методы и выводим информацию
 print("Информация о студентах:")
@@ -152,6 +157,10 @@ print(student2)
 print("\nИнформация о преподавателях:")
 print(lecturer1, "\n")
 print(lecturer2)
+
+print("\nИнформация о проверяющих:")
+print(reviewer1, "\n")
+print(reviewer2)
 
 print("\nСредняя оценка за курс Python среди студентов:",
       average_student_grades([student1, student2], "Python"))
