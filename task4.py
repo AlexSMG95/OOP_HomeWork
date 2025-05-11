@@ -146,11 +146,21 @@ student2.rate_lecture(lecturer2, "Kotlin", 7)
 reviewer1.rate_hw(student1, "Python", 10)
 reviewer1.rate_hw(student2, "Python", 9)
 
-reviewer2.rate_hw(student1, "Python", 9)  # проверка вторым рецензентом
+reviewer2.rate_hw(student1, "Python", 9)
 
+# Проверка магических методов сравнения (__lt__, __gt__)
+if student1 > student2:
+    print(f"\nСтудент {student1.name} имеет большую среднюю оценку, чем {student2.name}.")
+else:
+    print(f"\nСтудент {student2.name} имеет большую среднюю оценку, чем {student1.name}.")
+
+if lecturer1 < lecturer2:
+    print(f"Преподаватель {lecturer2.name} имеет лучшую среднюю оценку, чем {lecturer1.name}.")
+else:
+    print(f"Преподаватель {lecturer1.name} имеет лучшую среднюю оценку, чем {lecturer2.name}.")
 
 # Тестируем все методы и выводим информацию
-print("Информация о студентах:")
+print("\nИнформация о студентах:")
 print(student1, "\n")
 print(student2)
 
